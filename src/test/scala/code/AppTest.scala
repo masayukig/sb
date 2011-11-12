@@ -6,6 +6,7 @@ import Assert._
 import scala.xml.XML
 import net.liftweb.util._
 import net.liftweb.common._
+import org.xml.sax._
 
 object AppTest {
   def suite: Test = {
@@ -52,7 +53,7 @@ class AppTest extends TestCase("app") {
         try {
           XML.loadFile(file)
         } catch {
-          case e: org.xml.sax.SAXParseException => failed = file :: failed
+          case e: SAXParseException => failed = file :: failed
         }
       }
       if (file.isFile && handledXHtml(file.getName)) {
