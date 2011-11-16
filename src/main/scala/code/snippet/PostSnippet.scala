@@ -18,14 +18,12 @@ import code.model.{Post, User}
 class PostSnippet {
 
   def list = {
-    val items = Post.findAll(By(
-      Post.owner,
-      User.currentUser.get))
+    val items = Post.findAll
 
     ".item *" #> items.map { ps =>
       ".link *" #> "%s(by %s)".format(ps.title, ps.owner.obj.map{
-      _.niceName }.getOrElse("Anonymouse")) &
-      ".link [href]" #> ps.contents
+      _.shortName }.getOrElse("Anonymouse")) &
+      ".contents *" #> ps.contents
     }
   }
 
@@ -37,14 +35,14 @@ class PostSnippet {
       User.currentUser match {
         case Full(user) =>
           Post.create.title(title).contents(contents).owner(user).save
-          S.notice("記事を登録しました")
+          S.notice("記事を登録しました:" + contents)
         case _ =>
           S.error("登録するにはログインしてください")
       }
       S.redirectTo("/post")
     }
     "name=title" #> SHtml.onSubmit(title = _) &
-    "name=post" #> SHtml.onSubmit(contents = _) &
+    "name=contents" #> SHtml.onSubmit(contents = _) &
     "type=submit" #> SHtml.onSubmitUnit (process)
   }
 }
