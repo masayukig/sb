@@ -15,6 +15,27 @@
             <hr />
         </ul>
         <hr />
+        <script type="text/javascript">
+<!--
+$(document).ready(function()	{
+	// Add markItUp! to your textarea in one line
+	// $('textarea').markItUp( { Settings }, { OptionalExtraSettings } );
+	$('#contents').markItUp(mySettings);
+
+	// You can add content from anywhere in your page
+	// $.markItUp( { Settings } );
+	$('.add').click(function() {
+ 		$.markItUp( { 	openWith:'<opening tag>',
+						closeWith:'<\/closing tag>',
+						placeHolder:"New content"
+					}
+				);
+ 		return false;
+	});
+
+});
+-->
+</script>
         <form class="lift:PostSnippet.create?form=post">
             <div>Title:<input type="text" name="title" size="30" /></div>
             <div>Contents:<textarea id="contents" name="contents" rows="10" cols="80">ここにブログ記事を書きます</textarea></div>
