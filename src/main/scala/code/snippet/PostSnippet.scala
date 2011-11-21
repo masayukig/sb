@@ -23,7 +23,8 @@ class PostSnippet {
     ".item *" #> items.map { ps =>
       ".link *" #> "%s(by %s)".format(ps.title, ps.owner.obj.map{
       _.shortName }.getOrElse("Anonymouse")) &
-      ".contents *" #> ps.contents
+      ".contents *" #> ps.contents &
+      ".post_id *" #> ps.id
     }
   }
 
