@@ -48,11 +48,14 @@ class Boot {
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
 	       "Static Content")),
 
+      Menu(Loc("Show", Link(List("show"), true, "/show"),
+	       "Show Content")),
+
       Menu(S ? "Bookmark") / "bookmark" >>
         If(() => User.loggedIn_?, "ログインしてください"),
 
-        Menu(S ? "Post") / "post" >>
-          If(() => User.loggedIn_?, "ログインしてください")
+      Menu(S ? "Post") / "post" >>
+        If(() => User.loggedIn_?, "ログインしてください")
 
     )
 

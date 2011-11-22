@@ -22,9 +22,24 @@ class PostSnippet {
 
     ".item *" #> items.map { ps =>
       ".link *" #> "%s(by %s)".format(ps.title, ps.owner.obj.map{
-      _.shortName }.getOrElse("Anonymouse")) &
-      ".contents *" #> ps.contents &
-      ".post_id *" #> ps.id
+        _.shortName }.getOrElse("Anonymouse")) &
+        ".link [href]" #> ("/show?p=" + ps.id).toString() &
+        ".contents *" #> ps.contents &
+        ".post_id *" #> ps.id
+    }
+  }
+
+  def show = {
+    println(S.request.get.param("p").last)
+    val num = S.request.get.param("p").last
+    val item = Post.findByKey(num.toLong)
+
+    ".item *" #> item.map { ps =>
+      ".link *" #> "%s(by %s)".format(ps.title, ps.owner.obj.map{
+        _.shortName }.getOrElse("Anonymouse")) &
+        ".link [href]" #> ("/show?p=" + ps.id).toString() &
+        ".contents *" #> ps.contents &
+        ".post_id *" #> ps.id
     }
   }
 

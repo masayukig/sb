@@ -13,6 +13,8 @@ Sb is open source software released under the Apache 2.0 License.
 - add comment box(by using facebook tool or something)
 - add individual page link and display it
 - display short contents in the list page
+- multilingualization
+- simplify request uri
 - add skin system
 - add widget system
 - add plugin system
