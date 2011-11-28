@@ -3,7 +3,6 @@ package code.snippet
 import net.liftweb.util._
 import net.liftweb.common._
 import net.liftweb.http._
-import net.liftweb.mapper._
 import Helpers._
 import code.model.{Post, User}
 import scala.xml.Unparsed
@@ -16,7 +15,9 @@ import scala.xml.Unparsed
  * To change this template use File | Settings | File Templates.
  */
 
-class PostSnippet {
+class PostCrud {
+
+  private object selectedPost extends RequestVar[Box[Post]](Empty)
 
   def list = {
     val items = Post.findAll
@@ -69,5 +70,23 @@ class PostSnippet {
     "name=title" #> SHtml.onSubmit(title = _) &
     "name=contents" #> SHtml.onSubmit(content = _) &
     "type=submit" #> SHtml.onSubmitUnit (process)
+  }
+
+  private def savePost(post: Post) = post.validate match {
+    case Nil => post.save; S.redirectTo("/index")
+    case x => S.error(x); selectedPost(Full(post))
+  }
+
+  def edit = {
+    val p = S.request.get.param("p")
+    val num = {if (p != Empty) p.last else 1L}.toString
+    val post = Post.findByKey(num.toLong)
+
+    post.map(_.
+      toForm(Empty, savePost _) ++ <tr>
+      <td><a href="/index">Cancel</a></td>
+      <td><input type="submit" value="Save"/></td>
+    </tr>
+    ) openOr {S.error("Post not found"); S.redirectTo("/index")}
   }
 }

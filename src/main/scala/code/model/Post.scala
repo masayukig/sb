@@ -13,7 +13,7 @@ class Post extends LongKeyedMapper[Post] with IdPK with CreatedUpdated {
   override def getSingleton = Post
 
   object title extends MappedString(this, 1024)
-  object contents extends MappedTextarea(this, 1048576) {
+  object content extends MappedTextarea(this, 1048576) {
     override def textareaCols = 100
     override def textareaRows = 10
   }

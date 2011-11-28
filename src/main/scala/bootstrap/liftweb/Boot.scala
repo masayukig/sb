@@ -55,6 +55,9 @@ class Boot {
         If(() => User.loggedIn_?, "ログインしてください"),
 
       Menu(S ? "Post") / "post" >>
+        If(() => User.loggedIn_?, "ログインしてください"),
+
+      Menu(S ? "Edit") / "edit" >>
         If(() => User.loggedIn_?, "ログインしてください")
 
     )
