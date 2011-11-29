@@ -27,6 +27,7 @@ class PostCrud {
         _.shortName }.getOrElse("Anonymouse")) &
         ".link [href]" #> ("/show?p=" + ps.id).toString() &
         ".contents *" #> ps.content &
+        ".edit [href]" #> ("/edit?p=" + ps.id).toString() &
         ".post_id *" #> ps.id
     }
   }
@@ -40,7 +41,8 @@ class PostCrud {
       ".link *" #> "%s(by %s)".format(ps.title, ps.owner.obj.map{
         _.shortName }.getOrElse("Anonymouse")) &
         ".link [href]" #> ("/show?p=" + ps.id).toString() &
-        ".contents *" #> ps.content &
+        ".contents *" #> ps.content.is &
+        ".edit [href]" #> ("/edit?p=" + ps.id).toString() &
         ".post_id *" #> ps.id
     }
   }
@@ -49,7 +51,7 @@ class PostCrud {
     val p = S.request.get.param("p")
     val num = {if (p != Empty) p.last else 1L}.toString
     val post = Post.findByKey(num.toLong)
-    <pre>{Unparsed(post.map(_.content).openOr("Blog Not Found.").toString)}
+    <pre>{Unparsed(post.map(_.content.is).openOr("Blog Not Found.").toString)}
     </pre>
   }
 

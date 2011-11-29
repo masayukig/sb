@@ -8,7 +8,6 @@ This app is for my experimental and practice.
 Sb is open source software released under the Apache 2.0 License.
 
 ## TODO
-- remove duplicated codes(PostSnippet and PostCrud)
 - add edit link on each post
 - to be available markup
 - delete unnecessary menus
