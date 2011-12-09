@@ -90,5 +90,6 @@ class PostCrud {
       <td><input type="submit" value="Save"/></td>
     </tr>
     ) openOr {S.error("Post not found"); S.redirectTo("/index")}
+
   }
 }

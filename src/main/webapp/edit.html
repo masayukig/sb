@@ -8,8 +8,28 @@
             <hr />
         </li>
     </ul>
-    <table>
+    <script type="text/javascript">
+<!--
+$(document).ready(function()	{
+	// Add markItUp! to your textarea in one line
+	// $('textarea').markItUp( { Settings }, { OptionalExtraSettings } );
+	$('textarea').markItUp(mySettings);
+	//$('#contents').markItUp(mySettings);
+
+	// You can add content from anywhere in your page
+	// $.markItUp( { Settings } );
+	$('.add').click(function() {
+ 		$.markItUp( { 	openWith:'<opening tag>',
+						closeWith:'<\/closing tag>',
+						placeHolder:"New content"
+					}
+				);
+ 		return false;
+	});
+
+});
+-->
+    </script>
         <form class="lift:PostCrud.edit?form=post"></form>
-    </table>
 
 </lift:surround>
